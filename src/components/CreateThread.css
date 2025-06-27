@@ -1,0 +1,103 @@
+.create-thread-container {
+  min-height: 100vh;
+  background-color: #d3d3d3;
+}
+
+.header {
+  background-color: #66D48B;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: normal;
+}
+
+.create-thread-btn {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.create-thread-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.main-content {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 60px;
+  color: #333;
+  font-weight: normal;
+}
+
+.create-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.title-input {
+  width: 100%;
+  padding: 15px 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.title-input:focus {
+  outline: none;
+  border-color: #66D48B;
+  box-shadow: 0 0 0 2px rgba(127, 176, 105, 0.2);
+}
+
+.form-actions {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.back-link {
+  color: #007bff;
+  text-decoration: underline;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+
+.back-link:hover {
+  color: #0056b3;
+}
+
+.create-btn {
+  background-color: #66D48B;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.create-btn:hover {
+  background-color: #66D48B;
+} 
