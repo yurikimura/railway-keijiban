@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useState, useEffect } from 'react'
 import type { ReactNode } from 'react'
 
 export interface Thread {
@@ -27,15 +27,15 @@ interface ThreadProviderProps {
 }
 
 export const ThreadProvider: React.FC<ThreadProviderProps> = ({ children }) => {
-  const [threads, setThreads] = useState<Thread[]>([
-    { id: 1, title: '推しについて語るスレ' },
-    { id: 2, title: '今期覇権アニメ' },
-    { id: 3, title: 'TechTrainってどうなの？' },
-    { id: 4, title: '暇な人雑談しませんか' },
-    { id: 5, title: 'Rustについて語るスレ' },
-    { id: 6, title: '自宅警備員だけどなんか質問ある？' },
-    { id: 7, title: '大阪でおすすめのラーメン屋教えて' }
-  ])
+  const [threads, setThreads] = useState<Thread[]>([])
+
+  useEffect(() => {
+    fetch('https://railway.bulletinboard.techtrain.dev/threads')
+      .then(response => response.json())
+      .then(data => {
+        setThreads(data)
+      })
+  }, [])
 
   const addThread = (title: string) => {
     const newId = Math.max(...threads.map(t => t.id)) + 1
