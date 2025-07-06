@@ -16,7 +16,7 @@ const Home = () => {
         <h2>新着スレッド</h2>
         <div className="thread-list">
           {threads.map(thread => (
-            <Link key={thread.id} to={`/thread/${thread.id}`} className="thread-item">
+            <Link key={thread.id} to={`/threads/${thread.id}`} className="thread-item">
               {thread.title}
             </Link>
           ))}

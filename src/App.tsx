@@ -11,7 +11,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/thread/:id" element={<Thread />} />
+          <Route path="/threads/:thread_id" element={<Thread />} />
           <Route path="/create" element={<CreateThread />} />
         </Routes>
       </Router>

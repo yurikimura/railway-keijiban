@@ -18,6 +18,12 @@
   font-weight: normal;
 }
 
+.header-buttons {
+  display: flex;
+  gap: 16px;
+}
+
+.back-to-home-btn,
 .create-thread-btn {
   color: white;
   text-decoration: none;
@@ -27,6 +33,7 @@
   transition: background-color 0.2s;
 }
 
+.back-to-home-btn:hover,
 .create-thread-btn:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
