@@ -155,7 +155,7 @@ const Thread = () => {
     }
   }
 
-  if (!thread) return <div>Loading...</div>
+  if (!thread) return <div>スレッドが見つかりません</div>
 
   return (
     <div className="thread-container">
@@ -179,17 +179,17 @@ const Thread = () => {
         
         <div className="posts-container">
           <div className="posts-list">
-            {Array.isArray(thread.posts) ? thread.posts.map(post => (
-              <div key={post.id} className="post-item">
-                {post.content.split('\n').map((line, index) => (
-                  <div key={index}>{line}</div>
-                ))}
-              </div>
-            )) : <div>投稿データを読み込んでいます...</div>}
-            
-            {threadExists && thread.posts.length === 0 && (
+            {Array.isArray(thread.posts) && thread.posts.length > 0 ? (
+              thread.posts.map(post => (
+                <div key={post.id} className="post-item">
+                  {post.content.split('\n').map((line, index) => (
+                    <div key={index}>{line}</div>
+                  ))}
+                </div>
+              ))
+            ) : (
               <div style={{ textAlign: 'center', padding: '40px', color: '#666' }}>
-                まだ投稿がありません。最初の投稿をしてみましょう！
+                {threadExists ? 'まだ投稿がありません。最初の投稿をしてみましょう！' : '投稿がありません'}
               </div>
             )}
           </div>
@@ -204,8 +204,8 @@ const Thread = () => {
                 rows={4}
                 disabled={!threadExists}
               />
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 className="post-submit-btn"
                 disabled={!threadExists}
               >
@@ -219,4 +219,4 @@ const Thread = () => {
   )
 }
 
-export default Thread 
+export default Thread
