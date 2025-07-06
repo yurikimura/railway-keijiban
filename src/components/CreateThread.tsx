@@ -8,11 +8,16 @@ const CreateThread = () => {
   const navigate = useNavigate()
   const { addThread } = useThreads()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (title.trim()) {
-      addThread(title.trim())
-      navigate('/')
+      try {
+        const newThreadId = await addThread(title.trim())
+        navigate(`/threads/${newThreadId}`)
+      } catch (error) {
+        console.error('スレッド作成エラー:', error)
+        alert('スレッドの作成に失敗しました')
+      }
     }
   }
 

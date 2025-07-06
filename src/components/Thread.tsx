@@ -28,7 +28,7 @@ const Thread = () => {
 
       try {
         const threadId = thread_id
-        const contextThread = threads.find(t => t.id.toString() === threadId)
+        const contextThread = threads.find(t => t.id === threadId)
         const title = contextThread?.title || 'スレッドタイトル'
 
         // APIからポストデータを取得
@@ -79,7 +79,7 @@ const Thread = () => {
         setThreadExists(true) // ネットワークエラーは一時的な問題として扱う
         // エラーが発生した場合も空のスレッドを作成
         const threadId = thread_id || '1'
-        const contextThread = threads.find(t => t.id.toString() === threadId)
+        const contextThread = threads.find(t => t.id === threadId)
         const title = contextThread?.title || 'スレッドタイトル'
         setThread({
           id: threadId,
