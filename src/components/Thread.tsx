@@ -114,10 +114,9 @@ const Thread = () => {
           
           if (postsResponse.ok) {
             const posts = await postsResponse.json()
-            
+            console.log(posts)
             // postsが配列であることを確認
             const postsArray = Array.isArray(posts) ? posts : []
-            
             // 最新の投稿を最初に表示するために並び替え
             const sortedPosts = postsArray.sort((a, b) => {
               // timestampがある場合はそれで並び替え、なければIDで並び替え
@@ -126,7 +125,6 @@ const Thread = () => {
               }
               return b.id - a.id // IDが大きいものを先に
             })
-            
             // 投稿一覧を更新（必ずサーバー側の情報を使用）
             setThread({
               ...thread,
