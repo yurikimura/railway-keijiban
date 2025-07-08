@@ -4,9 +4,9 @@ import { useThreads } from '../contexts/ThreadContext'
 import './Thread.css'
 
 interface Post {
-  id: number
-  content: string
-  timestamp: string
+  id: string
+  post: string
+  timestamp?: string
 }
 
 interface ThreadData {
@@ -35,18 +35,20 @@ const Thread = () => {
         const response = await fetch(`https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts`)
         
         if (response.ok) {
-          const posts = await response.json()
+          const responseData = await response.json()
+          console.log('API Response:', responseData)
           
           // postsが配列であることを確認
-          const postsArray = Array.isArray(posts) ? posts : []
+          const postsArray = Array.isArray(responseData.posts) ? responseData.posts : []
+          console.log('Posts Array:', postsArray)
           
           // 最新の投稿を最初に表示するために並び替え
-          const sortedPosts = postsArray.sort((a, b) => {
+          const sortedPosts = postsArray.sort((a: Post, b: Post) => {
             // timestampがある場合はそれで並び替え、なければIDで並び替え
             if (a.timestamp && b.timestamp) {
               return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
             }
-            return b.id - a.id // IDが大きいものを先に
+            return b.id.localeCompare(a.id) // IDを文字列として比較
           })
           
           setThreadExists(true)
@@ -104,7 +106,7 @@ const Thread = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            content: newPost
+            post: newPost
           })
         })
 
@@ -113,17 +115,17 @@ const Thread = () => {
           const postsResponse = await fetch(`https://railway.bulletinboard.techtrain.dev/threads/${thread.id}/posts`)
           
           if (postsResponse.ok) {
-            const posts = await postsResponse.json()
-            console.log(posts)
+            const responseData = await postsResponse.json()
+            console.log(responseData)
             // postsが配列であることを確認
-            const postsArray = Array.isArray(posts) ? posts : []
+            const postsArray = Array.isArray(responseData.posts) ? responseData.posts : []
             // 最新の投稿を最初に表示するために並び替え
-            const sortedPosts = postsArray.sort((a, b) => {
+            const sortedPosts = postsArray.sort((a: Post, b: Post) => {
               // timestampがある場合はそれで並び替え、なければIDで並び替え
               if (a.timestamp && b.timestamp) {
                 return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
               }
-              return b.id - a.id // IDが大きいものを先に
+              return b.id.localeCompare(a.id) // IDを文字列として比較
             })
             // 投稿一覧を更新（必ずサーバー側の情報を使用）
             setThread({
@@ -180,7 +182,7 @@ const Thread = () => {
             {Array.isArray(thread.posts) && thread.posts.length > 0 ? (
               thread.posts.map(post => (
                 <div key={post.id} className="post-item">
-                  {post.content.split('\n').map((line, index) => (
+                  {(post.post || '').split('\n').map((line: string, index: number) => (
                     <div key={index}>{line}</div>
                   ))}
                 </div>
